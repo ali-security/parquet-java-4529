@@ -46,7 +46,7 @@ public class AvroConverters {
   public static final String[] DENY_PACKAGES;
 
   static {
-    DENY_PACKAGES = {
+    DENY_PACKAGES = new String[] {
             "bsh.XThis",
             "bsh.Interpreter",
             "com.mchange.v2.c3p0.PoolBackedDataSource",
