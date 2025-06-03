@@ -494,7 +494,7 @@ public class AvroConverters {
       }
 
       Package thePackage = clazz.getPackage();
-      if thePackage == null) {
+      if (thePackage == null) {
         throw new SecurityException("Class " + clazz + " has no package defined. "
             + "This is not allowed for classes used in Avro schema using java-class.");
       }
