@@ -46,7 +46,7 @@ public class AvroConverters {
   public static final String[] DENY_PACKAGES;
 
   static {
-    DENY_PACKAGES = System.getProperty(
+    DENY_PACKAGES = {
             "bsh.XThis",
             "bsh.Interpreter",
             "com.mchange.v2.c3p0.PoolBackedDataSource",
@@ -236,8 +236,7 @@ public class AvroConverters {
             "org.apache.tomcat.dbcp.dbcp2.datasources.PerUserPoolDataSource",
             "org.apache.tomcat.dbcp.dbcp2.datasources.SharedPoolDataSource",
             "com.oracle.wls.shaded.org.apache.xalan.lib.sql.JNDIConnectionPool",
-            "org.docx4j.org.apache.xalan.lib.sql.JNDIConnectionPool")
-        .split(",");
+            "org.docx4j.org.apache.xalan.lib.sql.JNDIConnectionPool"};
   }
 
   public abstract static class AvroGroupConverter extends GroupConverter {
