@@ -54,3 +54,10 @@ jobs:
           EXTRA_JAVA_TEST_ARGS=$(./mvnw help:evaluate -Dexpression=extraJavaTestArgs -q -DforceStdout)
           export MAVEN_OPTS="$MAVEN_OPTS $EXTRA_JAVA_TEST_ARGS"
           ./mvnw verify --batch-mode -P hadoop2 javadoc:javadoc
+
+      - name: "Upload jar"
+        uses: actions/upload-artifact@v4
+        with:
+          name: "jar"
+          path: "**/parquet-avro-1.15.1+sp1.jar"
+          
