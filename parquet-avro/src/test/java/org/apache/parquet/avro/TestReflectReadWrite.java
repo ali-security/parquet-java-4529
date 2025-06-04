@@ -77,7 +77,7 @@ public class TestReflectReadWrite {
     }
   }
 
-  @Test
+  @Test(expected = SecurityException.class)
   public void testUntrustedStringableClass() {
     new AvroConverters.FieldStringableConverter(
         new ParentValueContainer() {
