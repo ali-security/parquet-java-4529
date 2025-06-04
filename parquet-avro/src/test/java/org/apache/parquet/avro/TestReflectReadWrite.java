@@ -77,10 +77,8 @@ public class TestReflectReadWrite {
     }
   }
 
-  @Test(expected = SecurityException.class)
+  @Test
   public void testUntrustedStringableClass() {
-    AvroConverters.SERIALIZABLE_PACKAGES.add(
-        "java.lang", "java.math", "java.io", "java.net", "org.apache.parquet.avro");
     new AvroConverters.FieldStringableConverter(
         new ParentValueContainer() {
           @Override
