@@ -233,7 +233,8 @@ public class AvroConverters {
             "org.apache.tomcat.dbcp.dbcp2.datasources.PerUserPoolDataSource",
             "org.apache.tomcat.dbcp.dbcp2.datasources.SharedPoolDataSource",
             "com.oracle.wls.shaded.org.apache.xalan.lib.sql.JNDIConnectionPool",
-            "org.docx4j.org.apache.xalan.lib.sql.JNDIConnectionPool"};
+            "org.docx4j.org.apache.xalan.lib.sql.JNDIConnectionPool"
+  };
 
   public abstract static class AvroGroupConverter extends GroupConverter {
     protected final ParentValueContainer parent;
