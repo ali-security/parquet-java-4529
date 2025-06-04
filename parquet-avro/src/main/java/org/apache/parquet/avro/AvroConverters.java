@@ -485,8 +485,9 @@ public class AvroConverters {
       List<String> trustedPackages = Arrays.asList(SERIALIZABLE_PACKAGES);
       List<String> denyPackages = Arrays.asList(DENY_PACKAGES);
 
-      if (clazz.isPrimitive()) {
-        return; // primitives are always allowed
+      boolean trustAllPackages = trustedPackages.size() == 1 && "*".equals(trustedPackages.get(0));
+      if (trustAllPackages || clazz.isPrimitive()) {
+        return; // primitives are always allowed and if trustAllPackages is set, all classes are allowed
       }
 
       Package thePackage = clazz.getPackage();
@@ -495,10 +496,8 @@ public class AvroConverters {
             + "This is not allowed for classes used in Avro schema using java-class.");
       }
 
-      // if trusted packages is '*' or empty, check denied packages
-      boolean trustAllPackages = trustedPackages.size() == 1 && "*".equals(trustedPackages.get(0));
-      if (trustAllPackages || trustedPackages.isEmpty()) {
-        // Check if the class is in a denied package
+      // Check if the class is in a denied package
+      if (trustedPackages.isEmpty()) {
         for (String denyPackage : denyPackages) {
           if (thePackage.getName().equals(denyPackage)
               || thePackage.getName().startsWith(denyPackage + ".")) {
@@ -507,7 +506,7 @@ public class AvroConverters {
                 + " The class is marked as denied due to being potentially unsafe.");
           }
         }
-        return; // trustAllPackages && not denied
+        return; // not denied
       }
 
       // Check if the class is in a trusted package
@@ -516,11 +515,11 @@ public class AvroConverters {
             || thePackage.getName().startsWith(trustedPackage + ".")) {
           return; // trusted package
         }
-        throw new SecurityException("Forbidden " + clazz
-            + "! This class is not trusted to be included in Avro schema using java-class."
-            + " Please set org.apache.parquet.avro.SERIALIZABLE_PACKAGES system property"
-            + " with the packages you trust.");
       }
+      throw new SecurityException("Forbidden " + clazz
+          + "! This class is not trusted to be included in Avro schema using java-class."
+          + " Please set org.apache.parquet.avro.SERIALIZABLE_PACKAGES system property"
+          + " with the packages you trust.");
     }
   }
 
