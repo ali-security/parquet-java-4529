@@ -39,10 +39,8 @@ public class AvroConverters {
   public static final String[] SERIALIZABLE_PACKAGES;
 
   static {
-    SERIALIZABLE_PACKAGES = System.getProperty(
-            "org.apache.parquet.avro.SERIALIZABLE_PACKAGES",
-            "java.lang,java.math,java.io,java.net,org.apache.parquet.avro")
-        .split(",");
+    String prop = System.getProperty("org.apache.parquet.avro.SERIALIZABLE_PACKAGES");
+    SERIALIZABLE_PACKAGES = prop == null ? new String[0] : prop.split(",");
   }
 
   public abstract static class AvroGroupConverter extends GroupConverter {

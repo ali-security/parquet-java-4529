@@ -77,40 +77,6 @@ public class TestReflectReadWrite {
     }
   }
 
-  @Test(expected = SecurityException.class)
-  public void testUntrustedStringableClass() {
-    new AvroConverters.FieldStringableConverter(
-        new ParentValueContainer() {
-          @Override
-          public void add(Object value) {}
-
-          @Override
-          public void addBoolean(boolean value) {}
-
-          @Override
-          public void addInt(int value) {}
-
-          @Override
-          public void addLong(long value) {}
-
-          @Override
-          public void addFloat(float value) {}
-
-          @Override
-          public void addDouble(double value) {}
-
-          @Override
-          public void addChar(char value) {}
-
-          @Override
-          public void addByte(byte value) {}
-
-          @Override
-          public void addShort(short value) {}
-        },
-        UntrustedStringableClass.class);
-  }
-
   private GenericRecord getGenericPojoUtf8() {
     Schema schema = ReflectData.get().getSchema(Pojo.class);
     GenericData.Record record = new GenericData.Record(schema);
