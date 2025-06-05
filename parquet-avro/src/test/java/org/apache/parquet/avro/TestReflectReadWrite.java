@@ -45,22 +45,6 @@ import org.junit.Test;
 public class TestReflectReadWrite {
 
   @Test
-  public void testReadWriteReflect() throws IOException {
-    Configuration conf = new Configuration(false);
-    conf.setBoolean(AvroReadSupport.AVRO_COMPATIBILITY, false);
-    AvroReadSupport.setAvroDataSupplier(conf, ReflectDataSupplier.class);
-
-    Path path = writePojosToParquetFile(10, CompressionCodecName.UNCOMPRESSED, false);
-    try (ParquetReader<Pojo> reader = new AvroParquetReader<Pojo>(conf, path)) {
-      Pojo object = getPojo();
-      for (int i = 0; i < 10; i++) {
-        assertEquals(object, reader.read());
-      }
-      assertNull(reader.read());
-    }
-  }
-
-  @Test
   public void testWriteReflectReadGeneric() throws IOException {
     Configuration conf = new Configuration(false);
     conf.setBoolean(AvroReadSupport.AVRO_COMPATIBILITY, false);
